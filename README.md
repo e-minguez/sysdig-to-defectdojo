@@ -21,4 +21,5 @@ python3 ./sysdig-to-defectdojo -i 20220927-....json -o output.json -t "My Sysdig
 
 * Profit!
 
-![](assets/screenshot.png)
+![](assets/screenshot-findings.png)
+![](assets/screenshot-details.png)
