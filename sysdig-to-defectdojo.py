@@ -41,17 +41,32 @@ def main():
                       imagePullString: {dic["imagePullString"]}
                       imageId: {dic["imageId"]}
                       osName: {dic["osName"]}
-                      k8sClusterName: {dic["k8sClusterName"]}
-                      k8sNamespaceName: {dic["k8sNamespaceName"]}
-                      k8sWorkloadType: {dic["k8sWorkloadType"]}
-                      k8sWorkloadName: {dic["k8sWorkloadName"]}
-                      k8sPodContainerName: {dic["k8sPodContainerName"]}"""
+                      vulnCvssVersion: {dic["vulnCvssVersion"]}
+                      vulnCvssScore: {dic["vulnCvssScore"]}
+                      vulnCvssVector: {dic["vulnCvssVector"]}
+                      """
+    mitigation = f"""vulnFixAvailable: {dic["vulnFixAvailable"]}
+                      vulnFixVersion: {dic["vulnFixVersion"]}
+                      vulnDisclosureDate: {dic["vulnDisclosureDate"]}
+                      vulnSolutionDate: {dic["vulnSolutionDate"] if "vulnSolutionDate" in dic else ''}
+                      vulnExploitable: {dic["vulnExploitable"]}
+                      packageSuggestedFix: {dic["packageSuggestedFix"]}
+                  """
+    impact = f"""k8sClusterName: {dic["k8sClusterName"]}
+                 k8sNamespaceName: {dic["k8sNamespaceName"]}
+                 k8sWorkloadType: {dic["k8sWorkloadType"]}
+                 k8sWorkloadName: {dic["k8sWorkloadName"]}
+                 k8sPodContainerName: {dic["k8sPodContainerName"]}
+                 k8sPodCount: {dic["k8sPodCount"]}
+              """
     destjson["findings"].append({
       "date": reportdate,
       "title": dic["vulnName"],
       "cve": dic["vulnName"],
       "severity": dic["vulnSeverity"],
-      "description": re.sub(' +', ' ', description),
+      "impact": re.sub('\n +', '\n', impact),
+      "mitigation": re.sub('\n +', '\n', mitigation),
+      "description": re.sub('\n +', '\n', description),
       "references": dic["vulnLink"]
     })
 
